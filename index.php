@@ -4,9 +4,7 @@ $servername = "localhost";
 $username = "root";
 $password = "root";
 $db = "cars";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password);
+$conn = new mysqli($servername, $username, $password, $db);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -149,213 +147,53 @@ $conn = new mysqli($servername, $username, $password);
                 <li><a><img src="img/com.svg" data-category="com" alt="">Комфорт</a></li>
             </ul>
         </div>
-        <div class="cards">
+        <?php
+        $query = "SELECT class, city, photolink, model, gasoline, horsepower, cost FROM list";
+        $result = mysqli_query($conn, $query);
+        
+        
+        
+        // Начало блока с карточками
+        echo '<div class="cards">';
+        
+        // Выводим данные в карточки
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '
             <div class="card_block">
-                <div class="card vnedor">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car1.svg" alt="">
+                <div class="card ' . htmlspecialchars($row['class']) . '">
+                    <a class="city" href="">' . htmlspecialchars($row['city']) . '</a>
+                    <img class="img_car" src="' . htmlspecialchars($row['photolink']) . '" alt="">
                     <div class="cont">
-                        <p class="name_car">BMW X2, 2021</p>
+                        <p class="name_car">' . htmlspecialchars($row['model']) . '</p>
                         <div class="about2">
                             <div>
                                 <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
+                                <p>' . htmlspecialchars($row['gasoline']) . ' л/бензин</p>
                             </div>
                             <div>
                                 <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
+                                <p>' . htmlspecialchars($row['horsepower']) . ' л.с.</p>
                             </div>
                         </div>
                         <div class="line"></div>
                         <div class="foot">
                             <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
+                            <p>от <span>' . number_format($row['cost'], 0, '', ' ') . '</span> руб/сут.</p>
                         </div>
                     </div>
                 </div>
-                <div class="card biz">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car2.svg" alt="">
-                    <div class="cont">
-                        <p class="name_car">Kia Sportage, 2022</p>
-                        <div class="about2">
-                            <div>
-                                <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
-                            </div>
-                            <div>
-                                <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="foot">
-                            <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car3.svg" alt="">
-                    <div class="cont">
-                        <p class="name_car">Lexus IS, 2018</p>
-                        <div class="about2">
-                            <div>
-                                <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
-                            </div>
-                            <div>
-                                <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="foot">
-                            <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
-                        </div>
-                    </div>
-                </div>   
-            </div>
-            <div class="card_block">
-                <div class="card">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car4.svg" alt="">
-                    <div class="cont">
-                        <p class="name_car">Jaguar XF,  2012</p>
-                        <div class="about2">
-                            <div>
-                                <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
-                            </div>
-                            <div>
-                                <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="foot">
-                            <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car5.svg" alt="">
-                    <div class="cont">
-                        <p class="name_car">Toyota RAV4,  2017</p>
-                        <div class="about2">
-                            <div>
-                                <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
-                            </div>
-                            <div>
-                                <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="foot">
-                            <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car6.svg" alt="">
-                    <div class="cont">
-                        <p class="name_car">2021 Mazda 6, 2021</p>
-                        <div class="about2">
-                            <div>
-                                <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
-                            </div>
-                            <div>
-                                <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="foot">
-                            <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
-                        </div>
-                    </div>
-                </div>   
-            </div>
-            <div class="card_block">
-                <div class="card">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car7.svg" alt="">
-                    <div class="cont">
-                        <p class="name_car">Kia Sportage, 2022</p>
-                        <div class="about2">
-                            <div>
-                                <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
-                            </div>
-                            <div>
-                                <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="foot">
-                            <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car2.svg" alt="">
-                    <div class="cont">
-                        <p class="name_car">Lexus IS, 2018</p>
-                        <div class="about2">
-                            <div>
-                                <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
-                            </div>
-                            <div>
-                                <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="foot">
-                            <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <a class="city" href="">Москва</a>
-                    <img class="img_car" src="img/car1.svg" alt="">
-                    <div class="cont">
-                        <p class="name_car">BMW X2, 2021</p>
-                        <div class="about2">
-                            <div>
-                                <img src="img/xz.svg" alt="">
-                                <p>2,3 л/бензин</p>
-                            </div>
-                            <div>
-                                <img src="img/xz2.svg" alt="">
-                                <p>317 л.с.</p>
-                            </div>
-                        </div>
-                        <div class="line"></div>
-                        <div class="foot">
-                            <button>Забронировать</button>
-                            <p>от <span>7 150</span> руб/сут.</p>
-                        </div>
-                    </div>
+            </div>';
+        }
+        
+        echo '</div>'; // Закрываем блок .cards
+?>        
+       
+        </div>
+    </div>
+    </div>
                 </div>   
             </div>
         </div>
-        <script src="auto.js"></script>
         <div class="text-1">
             <p class="p3">Москва известна своими величественными аллеями, роскошными торговыми<br> 
                 центрами и впечатляющей архитектурой. В таком окружении неудивительно, что<br>
